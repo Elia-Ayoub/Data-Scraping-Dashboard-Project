@@ -18,3 +18,5 @@ TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 echo "$TIMESTAMP,$PRICE" >> "$DATA_FILE"
 
 echo "Scraped price: $PRICE"
+
+rm temp.html
