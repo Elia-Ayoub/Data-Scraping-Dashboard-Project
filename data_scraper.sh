@@ -2,7 +2,7 @@
 
 URL="https://www.veracash.com/gold-price-and-chart"
 
-DATA_FILE="gold_prices.csv"
+DATA_FILE="/home/ubuntu/Data-Scraping-Dashboard-Project/gold_prices.csv"
 
 # Fetch the webpage content and save it to a temporary file
 curl -s "$URL" > temp.html
