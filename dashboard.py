@@ -39,15 +39,22 @@ def compute_daily_report(df):
         low = df_daily["price"].min()
         volatility = df_daily["price"].std()
         report = html.Div([
-            html.H3("Daily Report"),
-            html.P(f"Date: {today}"),
-            html.P(f"Open: US${open_price:,.2f}"),
-            html.P(f"Close: US${close_price:,.2f}"),
-            html.P(f"High: US${high:,.2f}"),
-            html.P(f"Low: US${low:,.2f}"),
-            html.P(f"Volatility: {volatility:.2f}%"),
-            html.P(f"Change: {change:.2f}%")
-        ])
+            html.H3("📊 Daily Report", style={"textAlign": "center", "color": "#333"}),
+            html.P(f"📅 Date: {report_date}"),
+            html.P(f"🟢 Open: US${open_price:,.2f}"),
+            html.P(f"🔴 Close: US${close_price:,.2f}"),
+            html.P(f"📈 High: US${high:,.2f}"),
+            html.P(f"📉 Low: US${low:,.2f}"),
+            html.P(f"💥 Volatility: {volatility:.2f}%"),
+            html.P(f"🔁 Change: {change:.2f}%")
+        ], style={
+        "backgroundColor": "#f9f9f9",
+        "border": "1px solid #ddd",
+        "borderRadius": "10px",
+        "padding": "20px",
+        "width": "60%",
+        "margin": "auto"
+    })
     else:
         report = "No data available for today"
 
@@ -57,12 +64,29 @@ def compute_daily_report(df):
 
 # Define layout
 app.layout = html.Div([
-    html.H1("Gold Price Dashboard"),
-    html.Div(id="current-price", style={"fontSize": 24, "marginBottom": "20px"}),
-    dcc.Graph(id="price-graph"),
-    html.Div(id="daily-report", style={"marginTop": "30px", "fontSize": 18}),
+    html.H1("Gold Price Dashboard", style={
+        "textAlign": "center", 
+        "color": "#bfa14f", 
+        "marginTop": "20px"
+    }),
+
+    html.Div(id="current-price", style={
+        "fontSize": "28px",
+        "textAlign": "center",
+        "marginTop": "20px",
+        "color": "#333"
+    }),
+
+    dcc.Graph(id="price-graph", style={"margin": "40px"}),
+
+    html.Div(id="daily-report"),
+
     dcc.Interval(id="interval-component", interval=5*1000, n_intervals=0, max_intervals=1)
-])
+], style={
+    "fontFamily": "Arial, sans-serif",
+    "backgroundColor": "#ffffff",
+    "padding": "20px"
+})
 
 # Update dashboard on page load
 @app.callback(
